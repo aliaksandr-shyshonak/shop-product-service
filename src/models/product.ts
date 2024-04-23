@@ -1,3 +1,4 @@
+import { ItemDefinition } from "@azure/cosmos";
 import { Stock } from "./stock";
 
 export type Product = {
@@ -8,4 +9,11 @@ export type Product = {
 };
 
 export type ProductDto = Product & Omit<Stock, "product_id">;
-export type ProductPostBody = Omit<ProductDto, "id">;
+export type ProductCreateDto = Omit<ProductDto, "id">;
+
+export const mapToProduct = (item: ItemDefinition) => ({
+  id: item.id,
+  price: item.price,
+  title: item.title,
+  description: item.description,
+});

@@ -11,4 +11,8 @@ export class DbClientFactory {
     }
     return DbClientFactory.instance;
   }
+
+  public static getDatabase() {
+    return DbClientFactory.getInstance().database(process.env.DB_NAME);
+  }
 }
