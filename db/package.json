@@ -1,0 +1,18 @@
+{
+  "name": "db",
+  "version": "1.0.0",
+  "description": "Database fill script",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "npm run seed-db",
+    "seed-db": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/cosmos": "^4.0.0",
+    "dotenv": "^16.4.5"
+  }
+}

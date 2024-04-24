@@ -8,7 +8,7 @@ import { COMMON_HEADERS } from "../common/api-headers";
 import { DbClientFactory } from "../common/db-client-factory";
 import { ProductDataService } from "../services/product-data-service";
 
-export async function HttpGetProductList(
+export async function HttpGetProductTotal(
   request: HttpRequest,
   context: InvocationContext
 ): Promise<HttpResponseInit> {
@@ -16,9 +16,10 @@ export async function HttpGetProductList(
   try {
     const db = DbClientFactory.getDatabase();
     const products = await new ProductDataService(db).getProducts();
-    context.log(`Products found - "${products.length}"`);
+    const result = products.reduce((acc, val) => acc + val.count, 0);
+    context.log(`Products total found - "${result}"`);
     return {
-      body: JSON.stringify(products),
+      body: JSON.stringify(result),
       headers: COMMON_HEADERS,
     };
   } catch (error) {
@@ -27,9 +28,9 @@ export async function HttpGetProductList(
   }
 }
 
-app.http("HttpGetProductList", {
+app.http("HttpGetProductTotal", {
   methods: ["GET"],
   authLevel: "anonymous",
-  handler: HttpGetProductList,
-  route: "products",
+  handler: HttpGetProductTotal,
+  route: "products/total",
 });
