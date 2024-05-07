@@ -1,0 +1,28 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/src/functions/*.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "clean": "rimraf dist",
+    "prestart": "npm run clean && npm run build",
+    "start": "func start",
+    "test": "jest",
+    "publish": "func azure functionapp publish wfa-import-service-ne-001"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.0.0",
+    "@azure/storage-blob": "^12.17.0",
+    "csv-parse": "^5.5.5"
+  },
+  "devDependencies": {
+    "@types/node": "18.x",
+    "azure-functions-core-tools": "^4.x",
+    "jest": "^29.7.0",
+    "rimraf": "^5.0.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^4.0.0"
+  }
+}
