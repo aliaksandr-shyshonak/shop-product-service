@@ -22,7 +22,10 @@ export async function BlobImportProductsFromFile(
       for (const item of result) {
         const message = JSON.stringify(item);
         context.log(`Send message - ${message}`);
-        await sender.sendMessages({ body: message });
+        await sender.sendMessages({
+          body: message,
+          applicationProperties: { productPrice: +item.price },
+        });
       }
     } else {
       context.log("No items found.");
