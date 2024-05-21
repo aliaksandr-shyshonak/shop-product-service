@@ -7,6 +7,8 @@ export class DbClientFactory {
   public static getInstance(): CosmosClient {
     if (!DbClientFactory.instance) {
       const endpoint = process.env.COSMOS_ENDPOINT;
+      // const key = process.env.COSMOS_KEY;
+      // DbClientFactory.instance = new CosmosClient({ endpoint, key });
       const aadCredentials = new DefaultAzureCredential();
       DbClientFactory.instance = new CosmosClient({ endpoint, aadCredentials });
     }
